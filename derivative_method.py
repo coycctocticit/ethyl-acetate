@@ -26,6 +26,8 @@ import json
 
 def __init__():
 
+    #  This function loads config data from config.json
+
     global sheetname,cols,calibrating_remove_item_count,R_square_threshold,bad_data_threshold,bad_data_initial_value,bad_data_popping_times,molar_gas_constant
     
     print('loading config file')
@@ -37,7 +39,19 @@ def __init__():
     config["sheetname"],config["cols"],config["calibrating_remove_item_count"],config["R_square_threshold"],\
     config["bad_data_threshold"],config["bad_data_initial_value"],config["bad_data_popping_times"],config["molar_gas_constant"]
 
-
+    # Config data: some parameters related to data loading and pre-processing, you can change them in config.json without rewriting python code
+    #              sheetname: which sheet in excel file the conductivity data locates, defaulting 'Sheet1'
+    #              cols: which columns in excel sheet represents data of time and conductivity, defaulting [0,3]
+    #              calibrating_remove_item_count: to get a better conductivity-time curve, each time after calibrating, some groups of data will be deleted in sequence
+    #                                             this parameter determines how many groups of data will be deleted, defaulting 10
+    #              R_square_threshold: to get a better conductivity-time curve, each time after calibrating, some groups of data will be deleted in sequence
+    #                                  and calibration will be processed again, until R_square reaches R_square_threshold, defaulting 0.9995
+    #              bad_data_threshold: to recognize some abnormal fluctuation during middle and final stages of the experiment, differences of conductivity to adjacent ones
+    #                                  are calculated, if the difference is more than bad_data_threshold, the value will be deleted, defaulting 10
+    #              bad_data_initial_value: at the beginning of each experiment, some data before and during mixing substrates will be recorded, and they are expected not
+    #                                      to exist in later data-processing procedures, defaulting a list from 0 to 25
+    #              bad_data_popping_times: the pre-processing procedure described above will be processed for bad_data_popping_times to ensure that bad data in groups will be deleted, defaulting 5
+    #              molar_gas_constant: the gas constant R=8.314 J/(mol K), is needed to calculate activation energy in Arrhenius equation
 
 def __conduct_time_func__(x,a,b,c):
     return (a+b*x)/(1+c*x)
