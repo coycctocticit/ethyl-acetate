@@ -1,0 +1,12 @@
+{
+     "sheetname":"Sheet1",
+     "cols":[0,3],
+     "calibrating_remove_item_count":10,
+     "R_square_threshold":0.9995,
+     "bad_data_threshold":10,
+     "bad_data_initial_value":[
+        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25
+    ],
+     "bad_data_popping_times":5,
+     "molar_gas_constant":8.314
+}
